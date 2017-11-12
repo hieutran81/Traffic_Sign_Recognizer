@@ -66,9 +66,9 @@ def train():
 
 def test():
     with tf.Session() as sess:
-        saver.restore(sess, tf.train.latest_checkpoint('.'))
+        saver.restore(sess, tf.train.latest_checkpoint('./lenet_traffic_signs'))
         test_accuracy = evaluate(X_test, y_test)
         print("Test Accuracy = {:.3f}".format(test_accuracy))
 
-train()
+#train()
 test()
