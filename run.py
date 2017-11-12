@@ -2,7 +2,7 @@ import tensorflow as tf
 from CnnModel import LeNet
 from PreprocessData import *
 from sklearn.utils import shuffle
-EPOCHS = 45
+EPOCHS = 100
 BATCH_SIZE = 128
 n_classes = getNumberClasses()
 
