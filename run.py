@@ -2,7 +2,7 @@ import tensorflow as tf
 from CnnModel import LeNet
 from PreprocessData import *
 from sklearn.utils import shuffle
-EPOCHS = 45
+EPOCHS = 50
 BATCH_SIZE = 128
 n_classes = getNumberClasses()
 
@@ -61,14 +61,15 @@ def train():
             print("Validation Accuracy = {:.3f}".format(validation_accuracy))
             print()
 
-        saver.save(sess, './lenet_traffic_signs')
-        print("Model saved")
+        saver_path = saver.save(sess, '/save/model.ckpt')
+        print("Model saved in "+saver_path)
 
 def test():
     with tf.Session() as sess:
-        saver.restore(sess, tf.train.latest_checkpoint('.'))
+        saver.restore(sess, '/save/model.ckpt')
+        print("Model restore")
         test_accuracy = evaluate(X_test, y_test)
         print("Test Accuracy = {:.3f}".format(test_accuracy))
 
-train()
+#train()
 test()
