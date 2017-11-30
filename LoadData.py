@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import csv
 # from PIL import Image
 import numpy as np
+from GatherData import gatherData
 
 def readTrafficSigns(path = "data/train"):
     images = [] # images
@@ -16,8 +17,15 @@ def readTrafficSigns(path = "data/train"):
         next(gtReader) # skip header
         # loop over all images in current annotations file
         for row in gtReader:
-            images.append(plt.imread(prefix + row[0])) # the 1th column is the filename
-            labels.append(int(row[7])) # the 8th coltrainumn is the label
+            img = plt.imread(prefix + row[0])
+            label = int(row[7])
+            images.append(img) # the 1th column is the filename
+            labels.append(label) # the 8th coltrainumn is the label
+
+            more_datas = gatherData(img)
+            length = len(more_datas)
+            images.extend(more_datas)
+            labels.extend([label] * length)
         gtFile.close()
     return images, labels
 
